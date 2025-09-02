@@ -1,4 +1,6 @@
 import { Button } from "@/components/ui/button";
+import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
+import { Menu } from "lucide-react";
 import EciLogo from "@/components/EciLogo";
 
 const Header = () => {
@@ -15,6 +17,20 @@ const Header = () => {
         
         <nav className="hidden md:flex items-center space-x-6" role="navigation" aria-label="Main navigation">
           <a 
+            href="/" 
+            className="text-foreground hover:text-primary transition-colors focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 rounded-sm px-2 py-1"
+            aria-label="Home page"
+          >
+            Home
+          </a>
+          <a 
+            href="/resources" 
+            className="text-foreground hover:text-primary transition-colors focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 rounded-sm px-2 py-1"
+            aria-label="Access our resource library"
+          >
+            Resources
+          </a>
+          <a 
             href="#programs" 
             className="text-foreground hover:text-primary transition-colors focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 rounded-sm px-2 py-1"
             aria-label="View our career development programs"
@@ -22,29 +38,80 @@ const Header = () => {
             Programs
           </a>
           <a 
-            href="#how-it-works" 
+            href="/contact" 
             className="text-foreground hover:text-primary transition-colors focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 rounded-sm px-2 py-1"
-            aria-label="Learn about our process"
+            aria-label="Contact us"
           >
-            Process
+            Contact
           </a>
           <a 
-            href="#impact" 
+            href="/donate" 
             className="text-foreground hover:text-primary transition-colors focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 rounded-sm px-2 py-1"
-            aria-label="See our impact and success stories"
+            aria-label="Support our mission"
           >
-            Impact
-          </a>
-          <a 
-            href="#get-involved" 
-            className="text-foreground hover:text-primary transition-colors focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 rounded-sm px-2 py-1"
-            aria-label="Join our community"
-          >
-            Get Involved
+            Support Us
           </a>
         </nav>
         
-        <div className="flex items-center space-x-3">
+        {/* Mobile Navigation */}
+        <div className="md:hidden">
+          <Sheet>
+            <SheetTrigger asChild>
+              <Button variant="ghost" size="icon" aria-label="Open navigation menu">
+                <Menu className="h-6 w-6" />
+              </Button>
+            </SheetTrigger>
+            <SheetContent side="right" className="w-64">
+              <nav className="flex flex-col space-y-4 mt-8" role="navigation" aria-label="Mobile navigation">
+                <a 
+                  href="/" 
+                  className="text-foreground hover:text-primary transition-colors focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 rounded-sm px-2 py-1 text-lg"
+                  aria-label="Home page"
+                >
+                  Home
+                </a>
+                <a 
+                  href="/resources" 
+                  className="text-foreground hover:text-primary transition-colors focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 rounded-sm px-2 py-1 text-lg"
+                  aria-label="Access our resource library"
+                >
+                  Resources
+                </a>
+                <a 
+                  href="#programs" 
+                  className="text-foreground hover:text-primary transition-colors focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 rounded-sm px-2 py-1 text-lg"
+                  aria-label="View our career development programs"
+                >
+                  Programs
+                </a>
+                <a 
+                  href="/contact" 
+                  className="text-foreground hover:text-primary transition-colors focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 rounded-sm px-2 py-1 text-lg"
+                  aria-label="Contact us"
+                >
+                  Contact
+                </a>
+                <a 
+                  href="/donate" 
+                  className="text-foreground hover:text-primary transition-colors focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 rounded-sm px-2 py-1 text-lg"
+                  aria-label="Support our mission"
+                >
+                  Support Us
+                </a>
+                <div className="flex flex-col space-y-3 pt-4 border-t">
+                  <Button variant="ghost" size="sm" aria-label="Sign in to your account">
+                    Sign In
+                  </Button>
+                  <Button variant="cta" size="sm" aria-label="Join Elite Career Initiative">
+                    Join ECI
+                  </Button>
+                </div>
+              </nav>
+            </SheetContent>
+          </Sheet>
+        </div>
+        
+        <div className="hidden md:flex items-center space-x-3">
           <Button variant="ghost" size="sm" aria-label="Sign in to your account">
             Sign In
           </Button>

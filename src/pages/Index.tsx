@@ -4,6 +4,7 @@ import Programs from "@/components/Programs";
 import HowItWorks from "@/components/HowItWorks";
 import Impact from "@/components/Impact";
 import GetInvolved from "@/components/GetInvolved";
+import Newsletter from "@/components/Newsletter";
 import Footer from "@/components/Footer";
 
 const Index = () => {
@@ -24,6 +25,7 @@ const Index = () => {
         <HowItWorks />
         <Impact />
         <GetInvolved />
+        <Newsletter />
       </main>
       <Footer />
     </div>
