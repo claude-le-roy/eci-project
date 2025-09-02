@@ -24,6 +24,20 @@ const Header = () => {
             Home
           </a>
           <a 
+            href="/about" 
+            className="text-foreground hover:text-primary transition-colors focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 rounded-sm px-2 py-1"
+            aria-label="Learn about our mission"
+          >
+            About
+          </a>
+          <a 
+            href="/team" 
+            className="text-foreground hover:text-primary transition-colors focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 rounded-sm px-2 py-1"
+            aria-label="Meet our team"
+          >
+            Team
+          </a>
+          <a 
             href="/resources" 
             className="text-foreground hover:text-primary transition-colors focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 rounded-sm px-2 py-1"
             aria-label="Access our resource library"
@@ -69,6 +83,20 @@ const Header = () => {
                   aria-label="Home page"
                 >
                   Home
+                </a>
+                <a 
+                  href="/about" 
+                  className="text-foreground hover:text-primary transition-colors focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 rounded-sm px-2 py-1 text-lg"
+                  aria-label="Learn about our mission"
+                >
+                  About
+                </a>
+                <a 
+                  href="/team" 
+                  className="text-foreground hover:text-primary transition-colors focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 rounded-sm px-2 py-1 text-lg"
+                  aria-label="Meet our team"
+                >
+                  Team
                 </a>
                 <a 
                   href="/resources" 

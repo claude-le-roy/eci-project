@@ -6,10 +6,13 @@ import { Textarea } from "@/components/ui/textarea";
 import { Label } from "@/components/ui/label";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { Badge } from "@/components/ui/badge";
-import { Mail, Phone, MapPin, MessageSquare, Facebook, Twitter, Instagram, Linkedin, Clock } from "lucide-react";
+import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
+import { Mail, Phone, MapPin, MessageSquare, Facebook, Twitter, Instagram, Linkedin, Clock, HelpCircle } from "lucide-react";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
+import GoogleMap from "@/components/GoogleMap";
 import { useToast } from "@/hooks/use-toast";
+import contactHeroImage from "@/assets/contact-hero.jpg";
 
 const Contact = () => {
   const { toast } = useToast();
@@ -77,23 +80,71 @@ const Contact = () => {
     { name: "LinkedIn", icon: <Linkedin className="w-5 h-5" />, url: "https://linkedin.com/company/eci" }
   ];
 
+  const faqs = [
+    {
+      question: "What programs does ECI offer?",
+      answer: "We offer comprehensive career development programs including CV workshops, interview preparation, mentorship matching, skills training, job placement assistance, and networking events. All programs are designed to bridge the gap between education and employment."
+    },
+    {
+      question: "How can I join the mentorship program?",
+      answer: "You can apply for our mentorship program by filling out the application form on our website or contacting us directly. We match mentees with industry professionals based on career interests, educational background, and professional goals."
+    },
+    {
+      question: "Are there any fees for participating in ECI programs?",
+      answer: "Most of our core programs are offered free of charge to students and recent graduates. Some specialized workshops or certification programs may have minimal fees to cover materials and resources."
+    },
+    {
+      question: "Who is eligible to participate in ECI programs?",
+      answer: "Our programs are primarily designed for university students, recent graduates, and young professionals in Ghana. We welcome participants from all academic backgrounds and career stages who are committed to their professional development."
+    },
+    {
+      question: "How can companies partner with ECI?",
+      answer: "Companies can partner with us through various channels including sponsorship, providing internship opportunities, offering mentorship, hosting workshops, or participating in our job fairs. Contact our partnerships team for more information."
+    },
+    {
+      question: "What is the duration of your programs?",
+      answer: "Program duration varies depending on the type. Workshops typically last 1-3 days, mentorship programs run for 3-6 months, and our comprehensive career development programs can span 6-12 months with ongoing support."
+    },
+    {
+      question: "How do I become a volunteer mentor?",
+      answer: "We welcome experienced professionals who want to give back. You can apply through our volunteer section, attend an orientation session, and complete our mentor training program. We provide ongoing support to all our volunteer mentors."
+    },
+    {
+      question: "Do you provide job placement guarantees?",
+      answer: "While we cannot guarantee job placement, we have an 85% success rate in helping participants secure employment within 6 months of program completion. We provide ongoing support throughout the job search process."
+    }
+  ];
+
   return (
     <div className="min-h-screen bg-gradient-warm">
       <Header />
       
-      <main className="container mx-auto px-4 pt-20 pb-12">
-        <div className="text-center mb-12">
-          <h1 className="text-4xl md:text-5xl font-bold text-foreground mb-4">
-            Get In Touch
-          </h1>
-          <p className="text-xl text-muted-foreground max-w-3xl mx-auto">
-            Have questions about our programs? Want to get involved? We'd love to hear from you.
-          </p>
+      <main className="pb-12">
+        {/* Hero Section */}
+        <div className="relative h-96 overflow-hidden">
+          <img 
+            src={contactHeroImage} 
+            alt="Professional team meeting in a modern office environment"
+            className="w-full h-full object-cover"
+          />
+          <div className="absolute inset-0 bg-gradient-to-r from-background/90 to-background/60 flex items-center">
+            <div className="container mx-auto px-4">
+              <div className="max-w-2xl">
+                <h1 className="text-4xl md:text-5xl font-bold text-foreground mb-4">
+                  Get In Touch
+                </h1>
+                <p className="text-xl text-muted-foreground">
+                  Have questions about our programs? Want to get involved? We'd love to hear from you.
+                </p>
+              </div>
+            </div>
+          </div>
         </div>
 
-        <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 mb-12">
-          {/* Contact Form */}
-          <div className="lg:col-span-2">
+        <div className="container mx-auto px-4 -mt-12 relative z-10">
+          <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 mb-16">
+            {/* Contact Form */}
+            <div className="lg:col-span-2">
             <Card>
               <CardHeader>
                 <CardTitle className="flex items-center gap-2">
@@ -191,8 +242,8 @@ const Contact = () => {
             </Card>
           </div>
 
-          {/* Contact Information */}
-          <div className="space-y-6">
+            {/* Contact Information */}
+            <div className="space-y-6">
             <Card>
               <CardHeader>
                 <CardTitle>Contact Information</CardTitle>
@@ -263,31 +314,71 @@ const Contact = () => {
                 </div>
               </CardContent>
             </Card>
+            </div>
           </div>
-        </div>
 
-        {/* Quick Response Times */}
-        <Card>
-          <CardContent className="py-8">
-            <div className="text-center">
-              <h2 className="text-2xl font-semibold mb-4">Response Times</h2>
-              <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-                <div className="text-center">
-                  <Badge variant="secondary" className="mb-2">General Inquiries</Badge>
-                  <p className="text-muted-foreground">Within 24 hours</p>
-                </div>
-                <div className="text-center">
-                  <Badge variant="secondary" className="mb-2">WhatsApp</Badge>
-                  <p className="text-muted-foreground">Within 2 hours</p>
-                </div>
-                <div className="text-center">
-                  <Badge variant="secondary" className="mb-2">Urgent Matters</Badge>
-                  <p className="text-muted-foreground">Within 4 hours</p>
+          {/* FAQs Section */}
+          <Card className="mb-16">
+          <CardHeader>
+            <CardTitle className="flex items-center gap-2 text-center justify-center">
+              <HelpCircle className="w-6 h-6" />
+              Frequently Asked Questions
+            </CardTitle>
+          </CardHeader>
+          <CardContent>
+            <Accordion type="single" collapsible className="w-full">
+              {faqs.map((faq, index) => (
+                <AccordionItem key={index} value={`item-${index}`}>
+                  <AccordionTrigger className="text-left">
+                    {faq.question}
+                  </AccordionTrigger>
+                  <AccordionContent>
+                    <p className="text-muted-foreground leading-relaxed">
+                      {faq.answer}
+                    </p>
+                  </AccordionContent>
+                </AccordionItem>
+              ))}
+            </Accordion>
+          </CardContent>
+          </Card>
+
+          {/* Location & Map Section */}
+          <Card className="mb-16">
+          <CardHeader>
+            <CardTitle className="flex items-center gap-2">
+              <MapPin className="w-6 h-6" />
+              Find Us
+            </CardTitle>
+          </CardHeader>
+          <CardContent>
+            <GoogleMap />
+          </CardContent>
+          </Card>
+
+          {/* Quick Response Times */}
+          <Card>
+            <CardContent className="py-8">
+              <div className="text-center">
+                <h2 className="text-2xl font-semibold mb-4">Response Times</h2>
+                <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+                  <div className="text-center">
+                    <Badge variant="secondary" className="mb-2">General Inquiries</Badge>
+                    <p className="text-muted-foreground">Within 24 hours</p>
+                  </div>
+                  <div className="text-center">
+                    <Badge variant="secondary" className="mb-2">WhatsApp</Badge>
+                    <p className="text-muted-foreground">Within 2 hours</p>
+                  </div>
+                  <div className="text-center">
+                    <Badge variant="secondary" className="mb-2">Urgent Matters</Badge>
+                    <p className="text-muted-foreground">Within 4 hours</p>
+                  </div>
                 </div>
               </div>
-            </div>
-          </CardContent>
-        </Card>
+            </CardContent>
+          </Card>
+        </div>
       </main>
 
       <Footer />
