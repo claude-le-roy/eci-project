@@ -8,39 +8,40 @@ All colors MUST be HSL.
 
 @layer base {
   :root {
-    --background: 43 100% 98%;
-    --foreground: 190 100% 6%;
+    --background: 0 0% 100%;
+    --foreground: 280 15% 15%;
 
     --card: 0 0% 100%;
-    --card-foreground: 190 100% 6%;
+    --card-foreground: 280 15% 15%;
 
     --popover: 0 0% 100%;
-    --popover-foreground: 190 100% 6%;
+    --popover-foreground: 280 15% 15%;
 
-    --primary: 45 93% 47%;
-    --primary-foreground: 190 100% 6%;
+    --primary: 280 100% 50%;
+    --primary-foreground: 0 0% 100%;
 
-    --secondary: 190 74% 25%;
-    --secondary-foreground: 43 100% 98%;
+    --secondary: 320 100% 70%;
+    --secondary-foreground: 280 15% 15%;
 
-    --muted: 43 30% 94%;
-    --muted-foreground: 190 15% 40%;
+    --muted: 280 10% 96%;
+    --muted-foreground: 280 8% 45%;
 
-    --accent: 25 95% 60%;
-    --accent-foreground: 190 100% 6%;
+    --accent: 320 100% 80%;
+    --accent-foreground: 280 15% 15%;
 
     --destructive: 0 84.2% 60.2%;
-    --destructive-foreground: 43 100% 98%;
+    --destructive-foreground: 0 0% 100%;
 
-    --border: 43 30% 88%;
-    --input: 43 30% 88%;
-    --ring: 45 93% 47%;
+    --border: 280 10% 90%;
+    --input: 280 10% 90%;
+    --ring: 280 100% 50%;
 
-    /* Custom design tokens */
-    --gradient-hero: linear-gradient(135deg, hsl(45 93% 47%), hsl(190 74% 25%));
-    --gradient-warm: linear-gradient(180deg, hsl(43 100% 98%), hsl(43 30% 94%));
-    --shadow-warm: 0 10px 30px -10px hsl(45 93% 47% / 0.3);
-    --shadow-elegant: 0 4px 20px hsl(190 74% 25% / 0.15);
+    /* ECI Brand Colors - Pink to Purple Gradient */
+    --gradient-hero: linear-gradient(135deg, hsl(320 100% 70%), hsl(280 100% 50%));
+    --gradient-brand: linear-gradient(135deg, hsl(320 100% 70%), hsl(280 100% 50%));
+    --gradient-warm: linear-gradient(180deg, hsl(0 0% 100%), hsl(280 10% 96%));
+    --shadow-brand: 0 10px 30px -10px hsl(280 100% 50% / 0.3);
+    --shadow-elegant: 0 4px 20px hsl(280 100% 50% / 0.15);
     --transition-smooth: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 
     --radius: 0.5rem;
@@ -63,38 +64,39 @@ All colors MUST be HSL.
   }
 
   .dark {
-    --background: 190 74% 8%;
-    --foreground: 43 100% 98%;
+    --background: 280 15% 8%;
+    --foreground: 0 0% 95%;
 
-    --card: 190 74% 10%;
-    --card-foreground: 43 100% 98%;
+    --card: 280 15% 10%;
+    --card-foreground: 0 0% 95%;
 
-    --popover: 190 74% 10%;
-    --popover-foreground: 43 100% 98%;
+    --popover: 280 15% 10%;
+    --popover-foreground: 0 0% 95%;
 
-    --primary: 45 93% 47%;
-    --primary-foreground: 190 100% 6%;
+    --primary: 320 100% 70%;
+    --primary-foreground: 280 15% 15%;
 
-    --secondary: 190 40% 20%;
-    --secondary-foreground: 43 100% 98%;
+    --secondary: 280 100% 50%;
+    --secondary-foreground: 0 0% 95%;
 
-    --muted: 190 40% 15%;
-    --muted-foreground: 43 30% 70%;
+    --muted: 280 15% 15%;
+    --muted-foreground: 280 10% 65%;
 
-    --accent: 25 95% 60%;
-    --accent-foreground: 190 100% 6%;
+    --accent: 320 100% 80%;
+    --accent-foreground: 280 15% 15%;
 
     --destructive: 0 62.8% 30.6%;
-    --destructive-foreground: 43 100% 98%;
+    --destructive-foreground: 0 0% 95%;
 
-    --border: 190 40% 20%;
-    --input: 190 40% 20%;
-    --ring: 45 93% 47%;
+    --border: 280 15% 20%;
+    --input: 280 15% 20%;
+    --ring: 320 100% 70%;
 
-    --gradient-hero: linear-gradient(135deg, hsl(45 93% 47%), hsl(190 74% 25%));
-    --gradient-warm: linear-gradient(180deg, hsl(190 74% 8%), hsl(190 40% 15%));
-    --shadow-warm: 0 10px 30px -10px hsl(45 93% 47% / 0.4);
-    --shadow-elegant: 0 4px 20px hsl(190 74% 25% / 0.2);
+    --gradient-hero: linear-gradient(135deg, hsl(320 100% 70%), hsl(280 100% 50%));
+    --gradient-brand: linear-gradient(135deg, hsl(320 100% 70%), hsl(280 100% 50%));
+    --gradient-warm: linear-gradient(180deg, hsl(280 15% 8%), hsl(280 15% 15%));
+    --shadow-brand: 0 10px 30px -10px hsl(280 100% 50% / 0.4);
+    --shadow-elegant: 0 4px 20px hsl(280 100% 50% / 0.2);
     --sidebar-background: 240 5.9% 10%;
     --sidebar-foreground: 240 4.8% 95.9%;
     --sidebar-primary: 224.3 76.3% 48%;
@@ -112,10 +114,33 @@ All colors MUST be HSL.
   }
 
   body {
-    @apply bg-background text-foreground;
+    @apply bg-background text-foreground font-sans;
   }
   
   html {
     scroll-behavior: smooth;
+  }
+  
+  /* Skip navigation link for screen readers */
+  .skip-nav {
+    position: absolute;
+    top: -100vh;
+    left: 0;
+    background: hsl(var(--primary));
+    color: hsl(var(--primary-foreground));
+    padding: 0.5rem 1rem;
+    text-decoration: none;
+    z-index: 9999;
+    border-radius: 0 0 0.375rem 0;
+  }
+  
+  .skip-nav:focus {
+    top: 0;
+  }
+  
+  /* High contrast focus indicators */
+  .focus-visible {
+    outline: 2px solid hsl(var(--primary));
+    outline-offset: 2px;
   }
 }

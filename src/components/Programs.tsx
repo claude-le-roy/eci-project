@@ -8,29 +8,32 @@ const Programs = () => {
       description: "Comprehensive training on professional skills, interview preparation, and workplace readiness.",
       features: ["Resume Building", "Interview Skills", "Professional Communication", "Industry Insights"],
       duration: "6 weeks",
-      participants: "150+ graduates"
+      participants: "150+ graduates",
+      icon: "📚"
     },
     {
       title: "Mentorship Program",
       description: "One-on-one guidance from industry professionals to navigate career transitions successfully.",
       features: ["Personal Mentor", "Career Planning", "Network Building", "Goal Setting"],
       duration: "6 months",
-      participants: "200+ matched pairs"
+      participants: "200+ matched pairs",
+      icon: "🤝"
     },
     {
       title: "Job Placement Initiative",
       description: "Direct connections with hiring partners and exclusive access to entry-level opportunities.",
       features: ["Partner Companies", "Job Matching", "Application Support", "Follow-up Assistance"],
       duration: "Ongoing",
-      participants: "85% placement rate"
+      participants: "85% placement rate",
+      icon: "🚀"
     }
   ];
 
   return (
-    <section id="programs" className="py-20 bg-gradient-warm">
+    <section id="programs" className="py-20 bg-gradient-warm" aria-labelledby="programs-heading">
       <div className="container mx-auto px-4">
         <div className="text-center mb-12">
-          <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-4">
+          <h2 id="programs-heading" className="text-3xl md:text-4xl font-bold text-foreground mb-4">
             Our Programs
           </h2>
           <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
@@ -41,10 +44,10 @@ const Programs = () => {
         
         <div className="grid md:grid-cols-3 gap-8">
           {programs.map((program, index) => (
-            <Card key={index} className="bg-card shadow-elegant hover:shadow-warm transition-all duration-300 hover:-translate-y-2">
+            <Card key={index} className="bg-card shadow-elegant hover:shadow-brand transition-all duration-300 hover:-translate-y-2">
               <CardHeader>
-                <div className="w-12 h-12 bg-gradient-hero rounded-lg flex items-center justify-center mb-4">
-                  <span className="text-primary-foreground font-bold text-xl">{index + 1}</span>
+                <div className="w-12 h-12 bg-gradient-brand rounded-lg flex items-center justify-center mb-4" aria-hidden="true">
+                  <span className="text-2xl" role="img" aria-label={`Program ${index + 1} icon`}>{program.icon}</span>
                 </div>
                 <CardTitle className="text-xl text-card-foreground">{program.title}</CardTitle>
               </CardHeader>
@@ -62,16 +65,16 @@ const Programs = () => {
                   </div>
                 </div>
                 
-                <div className="space-y-2 mb-6">
+                <div className="space-y-2 mb-6" role="list" aria-label={`${program.title} features`}>
                   {program.features.map((feature, featureIndex) => (
-                    <div key={featureIndex} className="flex items-center text-sm">
-                      <div className="w-2 h-2 bg-primary rounded-full mr-3"></div>
+                    <div key={featureIndex} className="flex items-center text-sm" role="listitem">
+                      <div className="w-2 h-2 bg-primary rounded-full mr-3" aria-hidden="true"></div>
                       <span className="text-foreground">{feature}</span>
                     </div>
                   ))}
                 </div>
                 
-                <Button className="w-full" variant="outline">
+                <Button className="w-full" variant="outline" aria-label={`Learn more about ${program.title}`}>
                   Learn More
                 </Button>
               </CardContent>

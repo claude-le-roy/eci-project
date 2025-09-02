@@ -18,6 +18,9 @@ export default {
 			}
 		},
 		extend: {
+			fontFamily: {
+				'sans': ['Inter', 'system-ui', 'sans-serif'],
+			},
 			colors: {
 				border: 'hsl(var(--border))',
 				input: 'hsl(var(--input))',
@@ -65,10 +68,11 @@ export default {
 			},
 			backgroundImage: {
 				'gradient-hero': 'var(--gradient-hero)',
+				'gradient-brand': 'var(--gradient-brand)',
 				'gradient-warm': 'var(--gradient-warm)',
 			},
 			boxShadow: {
-				'warm': 'var(--shadow-warm)',
+				'brand': 'var(--shadow-brand)',
 				'elegant': 'var(--shadow-elegant)',
 			},
 			transitionTimingFunction: {

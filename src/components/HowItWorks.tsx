@@ -29,10 +29,10 @@ const HowItWorks = () => {
   ];
 
   return (
-    <section id="how-it-works" className="py-20 bg-background">
+    <section id="how-it-works" className="py-20 bg-background" aria-labelledby="how-it-works-heading">
       <div className="container mx-auto px-4">
         <div className="text-center mb-12">
-          <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-4">
+          <h2 id="how-it-works-heading" className="text-3xl md:text-4xl font-bold text-foreground mb-4">
             How It Works
           </h2>
           <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
@@ -43,14 +43,14 @@ const HowItWorks = () => {
         <div className="max-w-4xl mx-auto">
           <div className="grid md:grid-cols-2 gap-8">
             {steps.map((step, index) => (
-              <Card key={index} className="relative bg-card shadow-elegant hover:shadow-warm transition-all duration-300">
+              <Card key={index} className="relative bg-card shadow-elegant hover:shadow-brand transition-all duration-300">
                 <CardContent className="p-8">
                   <div className="flex items-start space-x-4">
                     <div className="flex-shrink-0">
-                      <div className="w-16 h-16 bg-gradient-hero rounded-full flex items-center justify-center text-2xl mb-4">
-                        {step.icon}
+                      <div className="w-16 h-16 bg-gradient-brand rounded-full flex items-center justify-center text-2xl mb-4" aria-hidden="true">
+                        <span role="img" aria-label={`Step ${step.step} icon`}>{step.icon}</span>
                       </div>
-                      <div className="w-8 h-8 bg-primary text-primary-foreground rounded-full flex items-center justify-center font-bold text-sm absolute -top-2 -left-2">
+                      <div className="w-8 h-8 bg-primary text-primary-foreground rounded-full flex items-center justify-center font-bold text-sm absolute -top-2 -left-2" aria-label={`Step ${step.step}`}>
                         {step.step}
                       </div>
                     </div>

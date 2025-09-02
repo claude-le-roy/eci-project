@@ -9,8 +9,16 @@ import Footer from "@/components/Footer";
 const Index = () => {
   return (
     <div className="min-h-screen">
+      {/* Skip navigation for screen readers */}
+      <a 
+        href="#main-content" 
+        className="skip-nav focus:outline-none focus:ring-2 focus:ring-primary"
+      >
+        Skip to main content
+      </a>
+      
       <Header />
-      <main>
+      <main id="main-content" role="main">
         <Hero />
         <Programs />
         <HowItWorks />

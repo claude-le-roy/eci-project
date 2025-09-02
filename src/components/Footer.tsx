@@ -1,16 +1,16 @@
+import EciLogo from "@/components/EciLogo";
+
 const Footer = () => {
   return (
-    <footer className="bg-secondary text-secondary-foreground py-16">
+    <footer className="bg-secondary text-secondary-foreground py-16" role="contentinfo">
       <div className="container mx-auto px-4">
         <div className="grid md:grid-cols-4 gap-8 mb-8">
           {/* Brand */}
           <div className="md:col-span-2">
-            <div className="flex items-center space-x-2 mb-4">
-              <div className="w-10 h-10 bg-gradient-hero rounded-lg flex items-center justify-center">
-                <span className="text-primary-foreground font-bold text-lg">ECI</span>
-              </div>
+            <div className="flex items-center space-x-3 mb-4">
+              <EciLogo className="w-10 h-10" />
               <div>
-                <h3 className="text-lg font-bold">Elite Career Initiative</h3>
+                <h3 className="text-lg font-semibold">Elite Career Initiative</h3>
                 <p className="text-sm text-secondary-foreground/80">Empowering Ghana's Future</p>
               </div>
             </div>
@@ -35,11 +35,11 @@ const Footer = () => {
           <div>
             <h4 className="font-semibold mb-4">Quick Links</h4>
             <ul className="space-y-2 text-sm">
-              <li><a href="#programs" className="text-secondary-foreground/80 hover:text-primary transition-colors">Programs</a></li>
-              <li><a href="#how-it-works" className="text-secondary-foreground/80 hover:text-primary transition-colors">How It Works</a></li>
-              <li><a href="#get-involved" className="text-secondary-foreground/80 hover:text-primary transition-colors">Get Involved</a></li>
-              <li><a href="#" className="text-secondary-foreground/80 hover:text-primary transition-colors">Success Stories</a></li>
-              <li><a href="#" className="text-secondary-foreground/80 hover:text-primary transition-colors">Resources</a></li>
+              <li><a href="#programs" className="text-secondary-foreground/80 hover:text-primary transition-colors focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 rounded-sm">Programs</a></li>
+              <li><a href="#how-it-works" className="text-secondary-foreground/80 hover:text-primary transition-colors focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 rounded-sm">How It Works</a></li>
+              <li><a href="#get-involved" className="text-secondary-foreground/80 hover:text-primary transition-colors focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 rounded-sm">Get Involved</a></li>
+              <li><a href="#" className="text-secondary-foreground/80 hover:text-primary transition-colors focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 rounded-sm">Success Stories</a></li>
+              <li><a href="#" className="text-secondary-foreground/80 hover:text-primary transition-colors focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 rounded-sm">Resources</a></li>
             </ul>
           </div>
           
@@ -47,9 +47,16 @@ const Footer = () => {
           <div>
             <h4 className="font-semibold mb-4">Contact</h4>
             <ul className="space-y-2 text-sm text-secondary-foreground/80">
-              <li>📧 info@elitecareergh.org</li>
-              <li>📱 +233 XX XXX XXXX</li>
-              <li>📍 Accra, Ghana</li>
+              <li>
+                <span role="img" aria-label="Email">📧</span> 
+                <a href="mailto:info@elitecareergh.org" className="hover:text-primary transition-colors ml-2">info@elitecareergh.org</a>
+              </li>
+              <li>
+                <span role="img" aria-label="Phone">📱</span> +233 XX XXX XXXX
+              </li>
+              <li>
+                <span role="img" aria-label="Location">📍</span> Accra, Ghana
+              </li>
             </ul>
           </div>
         </div>
