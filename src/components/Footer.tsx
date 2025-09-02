@@ -19,13 +19,31 @@ const Footer = () => {
               career development programs, mentorship, and professional opportunities.
             </p>
             <div className="flex space-x-4">
-              <a href="#" className="text-secondary-foreground/80 hover:text-primary transition-colors">
+              <a 
+                href="https://linkedin.com/company/elite-career-initiative" 
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-secondary-foreground/80 hover:text-primary transition-colors"
+                aria-label="Visit our LinkedIn page"
+              >
                 LinkedIn
               </a>
-              <a href="#" className="text-secondary-foreground/80 hover:text-primary transition-colors">
+              <a 
+                href="https://twitter.com/elitecareergh" 
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-secondary-foreground/80 hover:text-primary transition-colors"
+                aria-label="Visit our Twitter page"
+              >
                 Twitter
               </a>
-              <a href="#" className="text-secondary-foreground/80 hover:text-primary transition-colors">
+              <a 
+                href="https://facebook.com/elitecareerinitiative" 
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-secondary-foreground/80 hover:text-primary transition-colors"
+                aria-label="Visit our Facebook page"
+              >
                 Facebook
               </a>
             </div>

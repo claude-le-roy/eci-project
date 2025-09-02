@@ -190,13 +190,34 @@ const Team = () => {
                     <h2 className="text-2xl font-bold text-foreground mb-1">{ceo.name}</h2>
                     <p className="text-lg text-primary font-medium mb-4">{ceo.position}</p>
                     <div className="flex justify-center gap-3">
-                      <Button size="sm" variant="outline" onClick={() => window.open(ceo.social.linkedin, "_blank")}>
+                      <Button 
+                        size="sm" 
+                        variant="outline" 
+                        onClick={() => {
+                          const newWindow = window.open(ceo.social.linkedin, "_blank", "noopener,noreferrer");
+                          if (newWindow) newWindow.opener = null;
+                        }}
+                        aria-label="Visit CEO's LinkedIn profile"
+                      >
                         <Linkedin className="w-4 h-4" />
                       </Button>
-                      <Button size="sm" variant="outline" onClick={() => window.open(ceo.social.twitter, "_blank")}>
+                      <Button 
+                        size="sm" 
+                        variant="outline" 
+                        onClick={() => {
+                          const newWindow = window.open(ceo.social.twitter, "_blank", "noopener,noreferrer");
+                          if (newWindow) newWindow.opener = null;
+                        }}
+                        aria-label="Visit CEO's Twitter profile"
+                      >
                         <Twitter className="w-4 h-4" />
                       </Button>
-                      <Button size="sm" variant="outline" onClick={() => window.open(`mailto:${ceo.social.email}`)}>
+                      <Button 
+                        size="sm" 
+                        variant="outline" 
+                        onClick={() => window.open(`mailto:${ceo.social.email}`)}
+                        aria-label="Send email to CEO"
+                      >
                         <Mail className="w-4 h-4" />
                       </Button>
                     </div>

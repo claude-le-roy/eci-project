@@ -4,7 +4,7 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Checkbox } from "@/components/ui/checkbox";
-import { Mail, CheckCircle, Users, TrendingUp } from "lucide-react";
+import { Mail, CheckCircle, Users, TrendingUp, AlertCircle } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
 
 const Newsletter = () => {
@@ -12,6 +12,8 @@ const Newsletter = () => {
   const [email, setEmail] = useState("");
   const [interests, setInterests] = useState<string[]>([]);
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [emailError, setEmailError] = useState("");
+  const [lastSubmission, setLastSubmission] = useState<number | null>(null);
 
   const interestOptions = [
     { id: "career-tips", label: "Career Development Tips" },
@@ -30,11 +32,60 @@ const Newsletter = () => {
     }
   };
 
+  const validateEmail = (email: string) => {
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!email) {
+      setEmailError("Email is required");
+      return false;
+    }
+    if (email.length > 254) {
+      setEmailError("Email address is too long");
+      return false;
+    }
+    if (!emailRegex.test(email)) {
+      setEmailError("Please enter a valid email address");
+      return false;
+    }
+    setEmailError("");
+    return true;
+  };
+
+  const handleEmailChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const newEmail = e.target.value.slice(0, 254); // Limit input length
+    setEmail(newEmail);
+    if (newEmail && emailError) {
+      validateEmail(newEmail);
+    }
+  };
+
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    if (!email) return;
+    
+    // Rate limiting check
+    const now = Date.now();
+    if (lastSubmission && now - lastSubmission < 30000) {
+      toast({
+        title: "Please Wait",
+        description: "Please wait 30 seconds before submitting again.",
+        variant: "destructive",
+      });
+      return;
+    }
+
+    if (!validateEmail(email)) {
+      // Announce error to screen readers
+      const errorAnnouncement = document.createElement('div');
+      errorAnnouncement.setAttribute('aria-live', 'polite');
+      errorAnnouncement.setAttribute('aria-atomic', 'true');
+      errorAnnouncement.className = 'sr-only';
+      errorAnnouncement.textContent = emailError;
+      document.body.appendChild(errorAnnouncement);
+      setTimeout(() => document.body.removeChild(errorAnnouncement), 1000);
+      return;
+    }
 
     setIsSubmitting(true);
+    setLastSubmission(now);
     
     // Simulate subscription process
     await new Promise(resolve => setTimeout(resolve, 1000));
@@ -44,8 +95,18 @@ const Newsletter = () => {
       description: "Welcome to the ECI community. Check your email for confirmation.",
     });
     
+    // Announce success to screen readers
+    const successAnnouncement = document.createElement('div');
+    successAnnouncement.setAttribute('aria-live', 'polite');
+    successAnnouncement.setAttribute('aria-atomic', 'true');
+    successAnnouncement.className = 'sr-only';
+    successAnnouncement.textContent = "Successfully subscribed to newsletter";
+    document.body.appendChild(successAnnouncement);
+    setTimeout(() => document.body.removeChild(successAnnouncement), 1000);
+    
     setEmail("");
     setInterests([]);
+    setEmailError("");
     setIsSubmitting(false);
   };
 
@@ -125,12 +186,20 @@ const Newsletter = () => {
                         id="newsletter-email"
                         type="email"
                         value={email}
-                        onChange={(e) => setEmail(e.target.value)}
+                        onChange={handleEmailChange}
                         placeholder="your.email@example.com"
                         required
-                        className="bg-background"
-                        aria-describedby="email-help"
+                        maxLength={254}
+                        className={`bg-background ${emailError ? 'border-destructive' : ''}`}
+                        aria-describedby={emailError ? "email-error email-help" : "email-help"}
+                        aria-invalid={!!emailError}
                       />
+                      {emailError && (
+                        <div id="email-error" className="flex items-center gap-2 text-sm text-destructive" role="alert">
+                          <AlertCircle className="w-4 h-4" />
+                          {emailError}
+                        </div>
+                      )}
                       <p id="email-help" className="text-xs text-muted-foreground">
                         We'll never share your email address
                       </p>

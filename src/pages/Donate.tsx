@@ -12,6 +12,7 @@ import { useToast } from "@/hooks/use-toast";
 const Donate = () => {
   const { toast } = useToast();
   const [selectedAmount, setSelectedAmount] = useState(0);
+  const [lastSubmission, setLastSubmission] = useState<number | null>(null);
 
   const donationAmounts = [25, 50, 100, 250, 500, 1000];
   
@@ -182,12 +183,24 @@ const Donate = () => {
                     )}
                   </div>
 
-                  <Button 
-                    className="w-full" 
-                    size="lg"
-                    onClick={() => handleDonation(selectedAmount)}
-                    disabled={selectedAmount === 0}
-                  >
+                      <Button 
+                        className="w-full" 
+                        size="lg"
+                        onClick={() => {
+                          // Rate limiting check
+                          const now = Date.now();
+                          if (lastSubmission && now - lastSubmission < 30000) {
+                            toast({
+                              title: "Please Wait",
+                              description: "Please wait before making another donation attempt.",
+                              variant: "destructive",
+                            });
+                            return;
+                          }
+                          handleDonation(selectedAmount);
+                        }}
+                        disabled={selectedAmount === 0}
+                      >
                     Donate GH₵{selectedAmount}
                   </Button>
 
