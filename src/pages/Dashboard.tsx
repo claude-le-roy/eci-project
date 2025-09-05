@@ -5,8 +5,40 @@ import { StatsCards } from "@/components/dashboard/StatsCards";
 import { ChartsSection } from "@/components/dashboard/ChartsSection";
 import { RecentActivity } from "@/components/dashboard/RecentActivity";
 import { QuickActions } from "@/components/dashboard/QuickActions";
+import { DashboardFilters } from "@/components/dashboard/DashboardFilters";
+import { DashboardLoader } from "@/components/dashboard/DashboardLoader";
+import { useState, useEffect } from "react";
 
 const Dashboard = () => {
+  const [isLoading, setIsLoading] = useState(true);
+  const [filters, setFilters] = useState({
+    dateRange: { from: null, to: null },
+    program: "",
+    status: "",
+    location: "",
+    searchTerm: ""
+  });
+
+  // Simulate data loading
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setIsLoading(false);
+    }, 2000); // 2 second loading simulation
+
+    return () => clearTimeout(timer);
+  }, []);
+
+  // Handle filter changes
+  const handleFiltersChange = (newFilters: any) => {
+    setFilters(newFilters);
+    // Here you would typically refetch data based on filters
+    console.log("Filters changed:", newFilters);
+  };
+
+  if (isLoading) {
+    return <DashboardLoader />;
+  }
+
   return (
     <SidebarProvider>
       <div className="min-h-screen flex w-full bg-gradient-warm">
@@ -16,6 +48,9 @@ const Dashboard = () => {
           <DashboardHeader />
           
           <div className="flex-1 p-6 space-y-6 overflow-auto">
+            {/* Data Filters */}
+            <DashboardFilters onFiltersChange={handleFiltersChange} />
+            
             {/* Dashboard Stats */}
             <StatsCards />
             
