@@ -7,6 +7,7 @@ import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import EventRegistrationForm from "@/components/programs/EventRegistrationForm";
 import { format } from "date-fns";
+import programsHeroImage from "@/assets/programs-hero.jpg";
 
 const Programs = () => {
   const [selectedEvent, setSelectedEvent] = useState<any>(null);
@@ -128,22 +129,35 @@ const Programs = () => {
   };
 
   return (
-    <div className="min-h-screen bg-background">
+    <div className="min-h-screen bg-gradient-warm">
       <Header />
       
-      <main className="container mx-auto px-4 py-8">
+      <main className="pb-12">
         {/* Hero Section */}
-        <section className="text-center mb-12">
-          <h1 className="text-4xl font-bold text-foreground mb-4">
-            Programs & Events
-          </h1>
-          <p className="text-xl text-muted-foreground max-w-3xl mx-auto">
-            Discover our comprehensive career development programs and upcoming events designed to empower Ghana's youth with essential skills and opportunities.
-          </p>
-        </section>
+        <div className="relative h-96 overflow-hidden">
+          <img 
+            src={programsHeroImage} 
+            alt="Diverse young Ghanaian students and professionals collaborating in a modern training environment"
+            className="w-full h-full object-cover"
+          />
+          <div className="absolute inset-0 bg-gradient-to-r from-background/90 to-background/60 flex items-center">
+            <div className="container mx-auto px-4">
+              <div className="max-w-3xl">
+                <h1 className="text-4xl md:text-5xl font-bold text-foreground mb-4">
+                  Programs & Events
+                </h1>
+                <p className="text-xl text-muted-foreground leading-relaxed">
+                  Discover our comprehensive career development programs and upcoming events designed to empower Ghana's youth with essential skills and opportunities.
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
 
-        {/* Programs Section */}
-        <section className="mb-16">
+        <div className="container mx-auto px-4 -mt-12 relative z-10">
+
+          {/* Programs Section */}
+          <section className="mb-16">
           <div className="flex items-center gap-3 mb-8">
             <BookOpen className="h-8 w-8 text-primary" />
             <h2 className="text-3xl font-bold text-foreground">Our Programs</h2>
@@ -195,8 +209,8 @@ const Programs = () => {
           </div>
         </section>
 
-        {/* Upcoming Events Section */}
-        <section>
+          {/* Upcoming Events Section */}
+          <section>
           <div className="flex items-center gap-3 mb-8">
             <Calendar className="h-8 w-8 text-primary" />
             <h2 className="text-3xl font-bold text-foreground">Upcoming Events</h2>
@@ -264,7 +278,8 @@ const Programs = () => {
               </Card>
             ))}
           </div>
-        </section>
+          </section>
+        </div>
       </main>
 
       <Footer />
