@@ -11,6 +11,11 @@ import Programs from "./pages/Programs";
 import Contact from "./pages/Contact";
 import Donate from "./pages/Donate";
 import Dashboard from "./pages/Dashboard";
+import SignUp from "./pages/SignUp";
+import SignIn from "./pages/SignIn";
+import VerifyOTP from "./pages/VerifyOTP";
+import VerifyEmail from "./pages/VerifyEmail";
+import AuthCallback from "./pages/AuthCallback";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -30,6 +35,11 @@ const App = () => (
           <Route path="/contact" element={<Contact />} />
           <Route path="/donate" element={<Donate />} />
           <Route path="/dashboard" element={<Dashboard />} />
+          <Route path="/auth/sign-up" element={<SignUp />} />
+          <Route path="/auth/sign-in" element={<SignIn />} />
+          <Route path="/auth/verify-otp" element={<VerifyOTP />} />
+          <Route path="/auth/verify-email" element={<VerifyEmail />} />
+          <Route path="/auth/callback" element={<AuthCallback />} />
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
           <Route path="*" element={<NotFound />} />
         </Routes>

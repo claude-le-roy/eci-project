@@ -1,9 +1,12 @@
+import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
-import { Menu } from "lucide-react";
+import { Menu, User, UserPlus } from "lucide-react";
 import EciLogo from "@/components/EciLogo";
 
 const Header = () => {
+  const navigate = useNavigate();
   return (
     <header className="bg-background/95 backdrop-blur-sm border-b border-border sticky top-0 z-50" role="banner">
       <div className="container mx-auto px-4 py-4 flex items-center justify-between">
@@ -127,10 +130,24 @@ const Header = () => {
                   Support Us
                 </a>
                 <div className="flex flex-col space-y-3 pt-4 border-t">
-                  <Button variant="ghost" size="sm" aria-label="Sign in to your account">
+                  <Button 
+                    variant="ghost" 
+                    size="sm" 
+                    aria-label="Sign in to your account"
+                    onClick={() => navigate("/auth/sign-in")}
+                    className="justify-start"
+                  >
+                    <User className="mr-2 h-4 w-4" />
                     Sign In
                   </Button>
-                  <Button variant="cta" size="sm" aria-label="Join Elite Career Initiative">
+                  <Button 
+                    variant="cta" 
+                    size="sm" 
+                    aria-label="Join Elite Career Initiative"
+                    onClick={() => navigate("/auth/sign-up")}
+                    className="justify-start"
+                  >
+                    <UserPlus className="mr-2 h-4 w-4" />
                     Join ECI
                   </Button>
                 </div>
@@ -140,10 +157,20 @@ const Header = () => {
         </div>
         
         <div className="hidden md:flex items-center space-x-3">
-          <Button variant="ghost" size="sm" aria-label="Sign in to your account">
+          <Button 
+            variant="ghost" 
+            size="sm" 
+            aria-label="Sign in to your account"
+            onClick={() => navigate("/auth/sign-in")}
+          >
             Sign In
           </Button>
-          <Button variant="cta" size="sm" aria-label="Join Elite Career Initiative">
+          <Button 
+            variant="cta" 
+            size="sm" 
+            aria-label="Join Elite Career Initiative"
+            onClick={() => navigate("/auth/sign-up")}
+          >
             Join ECI
           </Button>
         </div>
