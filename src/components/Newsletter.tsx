@@ -6,6 +6,8 @@ import { Label } from "@/components/ui/label";
 import { Checkbox } from "@/components/ui/checkbox";
 import { Mail, CheckCircle, Users, TrendingUp, AlertCircle } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
+import NewsletterConfirmationModal from "@/components/modals/NewsletterConfirmationModal";
+import NewsletterSuccessModal from "@/components/modals/NewsletterSuccessModal";
 
 const Newsletter = () => {
   const { toast } = useToast();
@@ -14,6 +16,10 @@ const Newsletter = () => {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [emailError, setEmailError] = useState("");
   const [lastSubmission, setLastSubmission] = useState<number | null>(null);
+  const [showConfirmationModal, setShowConfirmationModal] = useState(false);
+  const [showSuccessModal, setShowSuccessModal] = useState(false);
+  const [confirmedEmail, setConfirmedEmail] = useState("");
+  const [confirmedInterests, setConfirmedInterests] = useState<string[]>([]);
 
   const interestOptions = [
     { id: "career-tips", label: "Career Development Tips" },
@@ -84,30 +90,36 @@ const Newsletter = () => {
       return;
     }
 
+    // Show confirmation modal instead of directly subscribing
+    setShowConfirmationModal(true);
+  };
+
+  const handleConfirmSubscription = async (confirmedEmail: string) => {
+    setShowConfirmationModal(false);
     setIsSubmitting(true);
-    setLastSubmission(now);
+    setLastSubmission(Date.now());
     
     // Simulate subscription process
     await new Promise(resolve => setTimeout(resolve, 1000));
     
-    toast({
-      title: "Successfully Subscribed!",
-      description: "Welcome to the ECI community. Check your email for confirmation.",
-    });
+    // Store confirmed details for success modal
+    setConfirmedEmail(confirmedEmail);
+    setConfirmedInterests([...interests]);
     
-    // Announce success to screen readers
-    const successAnnouncement = document.createElement('div');
-    successAnnouncement.setAttribute('aria-live', 'polite');
-    successAnnouncement.setAttribute('aria-atomic', 'true');
-    successAnnouncement.className = 'sr-only';
-    successAnnouncement.textContent = "Successfully subscribed to newsletter";
-    document.body.appendChild(successAnnouncement);
-    setTimeout(() => document.body.removeChild(successAnnouncement), 1000);
+    // Show success modal
+    setShowSuccessModal(true);
     
+    // Reset form
     setEmail("");
     setInterests([]);
     setEmailError("");
     setIsSubmitting(false);
+  };
+
+  const handleCloseSuccessModal = () => {
+    setShowSuccessModal(false);
+    setConfirmedEmail("");
+    setConfirmedInterests([]);
   };
 
   return (
@@ -251,6 +263,25 @@ const Newsletter = () => {
           </Card>
         </div>
       </div>
+
+      {/* Confirmation Modal */}
+      <NewsletterConfirmationModal
+        isOpen={showConfirmationModal}
+        onClose={() => setShowConfirmationModal(false)}
+        onConfirm={handleConfirmSubscription}
+        email={email}
+        interests={interests}
+        interestOptions={interestOptions}
+      />
+
+      {/* Success Modal */}
+      <NewsletterSuccessModal
+        isOpen={showSuccessModal}
+        onClose={handleCloseSuccessModal}
+        email={confirmedEmail}
+        interests={confirmedInterests}
+        interestOptions={interestOptions}
+      />
     </section>
   );
 };
