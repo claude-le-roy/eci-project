@@ -26,8 +26,8 @@ const NewsletterSuccessModal = ({
 
   return (
     <Dialog open={isOpen} onOpenChange={onClose}>
-      <DialogContent className="sm:max-w-md text-center">
-        <div className="space-y-6 py-4">
+      <DialogContent className="w-[95vw] max-w-md mx-4 sm:mx-0 text-center">
+        <div className="space-y-4 md:space-y-6 py-2 md:py-4">
           {/* Animated Check Icon */}
           <div className="mx-auto w-16 h-16 bg-primary/10 rounded-full flex items-center justify-center animate-scale-in">
             <CheckCircle className="w-8 h-8 text-primary animate-fade-in" />
@@ -35,10 +35,10 @@ const NewsletterSuccessModal = ({
 
           {/* Success Message */}
           <div className="space-y-2">
-            <h2 className="text-xl font-bold text-foreground">
+            <h2 className="text-lg md:text-xl font-bold text-foreground">
               Successfully Subscribed!
             </h2>
-            <p className="text-muted-foreground">
+            <p className="text-sm md:text-base text-muted-foreground">
               Welcome to the ECI community! You're now subscribed to:
             </p>
           </div>
@@ -77,7 +77,7 @@ const NewsletterSuccessModal = ({
           </div>
 
           {/* Close Button */}
-          <Button onClick={onClose} className="w-full">
+          <Button onClick={onClose} className="w-full min-h-[44px]">
             Continue Exploring ECI
           </Button>
         </div>

@@ -127,69 +127,69 @@ const Newsletter = () => {
       <div className="container mx-auto px-4">
         <div className="max-w-4xl mx-auto">
           <Card className="bg-background/95 backdrop-blur-sm border-0 shadow-xl">
-            <CardContent className="p-8 lg:p-12">
-              <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 items-center">
+            <CardContent className="p-6 sm:p-8 lg:p-12">
+              <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 md:gap-8 items-start lg:items-center">
                 {/* Newsletter Info */}
                 <div>
                   <div className="flex items-center gap-3 mb-4">
-                    <div className="p-3 bg-primary/10 rounded-lg">
-                      <Mail className="w-6 h-6 text-primary" />
+                    <div className="p-2 md:p-3 bg-primary/10 rounded-lg">
+                      <Mail className="w-5 h-5 md:w-6 md:h-6 text-primary" />
                     </div>
-                    <h2 id="newsletter-heading" className="text-2xl lg:text-3xl font-bold text-foreground">
+                    <h2 id="newsletter-heading" className="text-xl md:text-2xl lg:text-3xl font-bold text-foreground">
                       Stay Updated
                     </h2>
                   </div>
                   
-                  <p className="text-muted-foreground mb-6 text-lg">
+                  <p className="text-muted-foreground mb-4 md:mb-6 text-base md:text-lg leading-relaxed">
                     Join thousands of young professionals receiving weekly insights, 
                     job opportunities, and career development resources.
                   </p>
 
                   {/* Newsletter Stats */}
-                  <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 mb-6">
-                    <div className="text-center">
-                      <div className="flex items-center justify-center gap-2 mb-1">
-                        <Users className="w-4 h-4 text-primary" />
-                        <span className="font-bold text-foreground">5,000+</span>
+                  <div className="grid grid-cols-3 gap-2 sm:gap-4 mb-4 md:mb-6">
+                    <div className="text-center p-2">
+                      <div className="flex flex-col sm:flex-row items-center justify-center gap-1 sm:gap-2 mb-1">
+                        <Users className="w-3 h-3 sm:w-4 sm:h-4 text-primary" />
+                        <span className="font-bold text-foreground text-sm sm:text-base">5,000+</span>
                       </div>
-                      <p className="text-sm text-muted-foreground">Subscribers</p>
+                      <p className="text-xs sm:text-sm text-muted-foreground">Subscribers</p>
                     </div>
-                    <div className="text-center">
-                      <div className="flex items-center justify-center gap-2 mb-1">
-                        <TrendingUp className="w-4 h-4 text-primary" />
-                        <span className="font-bold text-foreground">Weekly</span>
+                    <div className="text-center p-2">
+                      <div className="flex flex-col sm:flex-row items-center justify-center gap-1 sm:gap-2 mb-1">
+                        <TrendingUp className="w-3 h-3 sm:w-4 sm:h-4 text-primary" />
+                        <span className="font-bold text-foreground text-sm sm:text-base">Weekly</span>
                       </div>
-                      <p className="text-sm text-muted-foreground">Updates</p>
+                      <p className="text-xs sm:text-sm text-muted-foreground">Updates</p>
                     </div>
-                    <div className="text-center">
-                      <div className="flex items-center justify-center gap-2 mb-1">
-                        <CheckCircle className="w-4 h-4 text-primary" />
-                        <span className="font-bold text-foreground">Expert</span>
+                    <div className="text-center p-2">
+                      <div className="flex flex-col sm:flex-row items-center justify-center gap-1 sm:gap-2 mb-1">
+                        <CheckCircle className="w-3 h-3 sm:w-4 sm:h-4 text-primary" />
+                        <span className="font-bold text-foreground text-sm sm:text-base">Expert</span>
                       </div>
-                      <p className="text-sm text-muted-foreground">Content</p>
+                      <p className="text-xs sm:text-sm text-muted-foreground">Content</p>
                     </div>
                   </div>
 
                   {/* What You'll Get */}
-                  <div className="space-y-2 text-sm">
-                    <div className="flex items-center gap-2">
-                      <CheckCircle className="w-4 h-4 text-primary flex-shrink-0" />
-                      <span>Weekly job opportunities from partner companies</span>
+                  <div className="space-y-2 text-xs sm:text-sm">
+                    <div className="flex items-start gap-2">
+                      <CheckCircle className="w-3 h-3 sm:w-4 sm:h-4 text-primary flex-shrink-0 mt-0.5" />
+                      <span className="leading-relaxed">Weekly job opportunities from partner companies</span>
                     </div>
-                    <div className="flex items-center gap-2">
-                      <CheckCircle className="w-4 h-4 text-primary flex-shrink-0" />
-                      <span>Career development tips from industry experts</span>
+                    <div className="flex items-start gap-2">
+                      <CheckCircle className="w-3 h-3 sm:w-4 sm:h-4 text-primary flex-shrink-0 mt-0.5" />
+                      <span className="leading-relaxed">Career development tips from industry experts</span>
                     </div>
-                    <div className="flex items-center gap-2">
-                      <CheckCircle className="w-4 h-4 text-primary flex-shrink-0" />
-                      <span>Early access to workshops and mentorship programs</span>
+                    <div className="flex items-start gap-2">
+                      <CheckCircle className="w-3 h-3 sm:w-4 sm:h-4 text-primary flex-shrink-0 mt-0.5" />
+                      <span className="leading-relaxed">Early access to workshops and mentorship programs</span>
                     </div>
                   </div>
                 </div>
 
                 {/* Subscription Form */}
-                <div>
-                  <form onSubmit={handleSubmit} className="space-y-6">
+                <div className="lg:order-first">
+                  <form onSubmit={handleSubmit} className="space-y-4 md:space-y-6">
                     <div className="space-y-2">
                       <Label htmlFor="newsletter-email" className="text-foreground font-medium">
                         Email Address *
@@ -218,12 +218,12 @@ const Newsletter = () => {
                     </div>
 
                     <div className="space-y-3">
-                      <Label className="text-foreground font-medium">
+                      <Label className="text-foreground font-medium text-sm md:text-base">
                         What interests you? (Optional)
                       </Label>
-                      <div className="grid grid-cols-1 gap-3">
+                      <div className="grid grid-cols-1 gap-2 md:gap-3">
                         {interestOptions.map((option) => (
-                          <div key={option.id} className="flex items-center space-x-2">
+                          <div key={option.id} className="flex items-center space-x-2 p-2 rounded hover:bg-muted/50 transition-colors">
                             <Checkbox
                               id={option.id}
                               checked={interests.includes(option.id)}
@@ -231,10 +231,11 @@ const Newsletter = () => {
                                 handleInterestChange(option.id, checked as boolean)
                               }
                               aria-describedby={`${option.id}-description`}
+                              className="data-[state=checked]:bg-primary data-[state=checked]:border-primary"
                             />
                             <Label 
                               htmlFor={option.id} 
-                              className="text-sm text-foreground cursor-pointer"
+                              className="text-sm text-foreground cursor-pointer flex-1 leading-relaxed"
                             >
                               {option.label}
                             </Label>
@@ -245,7 +246,7 @@ const Newsletter = () => {
 
                     <Button 
                       type="submit" 
-                      className="w-full" 
+                      className="w-full min-h-[44px]" 
                       size="lg"
                       disabled={!email || isSubmitting}
                     >

@@ -105,7 +105,7 @@ const SignUp = () => {
     <div className="min-h-screen bg-gradient-warm">
       <Header />
       
-      <div className="container mx-auto px-4 py-12">
+      <div className="container mx-auto px-4 py-6 md:py-12">
         <div className="max-w-md mx-auto">
           <Card className="shadow-elegant border-border/20">
             <CardHeader className="text-center">
@@ -117,9 +117,9 @@ const SignUp = () => {
                 Create your account to access career mentorship and volunteer opportunities
               </CardDescription>
             </CardHeader>
-            <CardContent>
-              <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
-                <div className="grid grid-cols-2 gap-4">
+            <CardContent className="p-4 md:p-6">
+              <form onSubmit={handleSubmit(onSubmit)} className="space-y-3 md:space-y-4">
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 md:gap-4">
                   <div className="space-y-2">
                     <Label htmlFor="firstName">First Name</Label>
                     <Input
@@ -266,7 +266,7 @@ const SignUp = () => {
 
                 <Button 
                   type="submit" 
-                  className="w-full bg-gradient-brand hover:bg-gradient-brand/90"
+                  className="w-full bg-gradient-brand hover:bg-gradient-brand/90 min-h-[44px]"
                   disabled={isLoading}
                 >
                   {isLoading ? "Creating Account..." : "Sign Up"}

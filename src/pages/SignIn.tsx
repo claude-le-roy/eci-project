@@ -112,7 +112,7 @@ const SignIn = () => {
     <div className="min-h-screen bg-gradient-warm">
       <Header />
       
-      <div className="container mx-auto px-4 py-12">
+      <div className="container mx-auto px-4 py-6 md:py-12">
         <div className="max-w-md mx-auto">
           <Card className="shadow-elegant border-border/20">
             <CardHeader className="text-center">
@@ -124,8 +124,8 @@ const SignIn = () => {
                 Sign in to your ECI account to access the dashboard
               </CardDescription>
             </CardHeader>
-            <CardContent>
-              <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
+            <CardContent className="p-4 md:p-6">
+              <form onSubmit={handleSubmit(onSubmit)} className="space-y-3 md:space-y-4">
                 <div className="space-y-2">
                   <Label htmlFor="emailOrUsername">Email or Username</Label>
                   <Input
@@ -170,7 +170,7 @@ const SignIn = () => {
 
                 <Button 
                   type="submit" 
-                  className="w-full bg-gradient-brand hover:bg-gradient-brand/90"
+                  className="w-full bg-gradient-brand hover:bg-gradient-brand/90 min-h-[44px]"
                   disabled={isLoading}
                 >
                   {isLoading ? "Signing In..." : "Sign In"}

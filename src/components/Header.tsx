@@ -9,16 +9,16 @@ const Header = () => {
   const navigate = useNavigate();
   return (
     <header className="bg-background/95 backdrop-blur-sm border-b border-border sticky top-0 z-50" role="banner">
-      <div className="container mx-auto px-4 py-4 flex items-center justify-between">
-        <div className="flex items-center space-x-3">
-          <EciLogo className="w-12 h-12" />
-          <div>
-            <h1 className="text-lg font-semibold text-foreground">Elite Career Initiative</h1>
-            <p className="text-xs text-muted-foreground">Empowering Ghana's Future</p>
+      <div className="container mx-auto px-4 py-3 md:py-4 flex items-center justify-between">
+        <div className="flex items-center space-x-2 md:space-x-3 min-w-0">
+          <EciLogo className="w-10 h-10 md:w-12 md:h-12 flex-shrink-0" />
+          <div className="min-w-0">
+            <h1 className="text-base md:text-lg font-semibold text-foreground truncate">Elite Career Initiative</h1>
+            <p className="text-xs text-muted-foreground hidden sm:block">Empowering Ghana's Future</p>
           </div>
         </div>
         
-        <nav className="hidden md:flex items-center space-x-6" role="navigation" aria-label="Main navigation">
+        <nav className="hidden lg:flex items-center space-x-4 xl:space-x-6" role="navigation" aria-label="Main navigation">
           <a 
             href="/" 
             className="text-foreground hover:text-primary transition-colors focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 rounded-sm px-2 py-1"
@@ -71,14 +71,14 @@ const Header = () => {
         </nav>
         
         {/* Mobile Navigation */}
-        <div className="md:hidden">
+        <div className="lg:hidden">
           <Sheet>
             <SheetTrigger asChild>
               <Button variant="ghost" size="icon" aria-label="Open navigation menu">
                 <Menu className="h-6 w-6" />
               </Button>
             </SheetTrigger>
-            <SheetContent side="right" className="w-64">
+            <SheetContent side="right" className="w-72 sm:w-80">
               <nav className="flex flex-col space-y-4 mt-8" role="navigation" aria-label="Mobile navigation">
                 <a 
                   href="/" 
@@ -156,7 +156,7 @@ const Header = () => {
           </Sheet>
         </div>
         
-        <div className="hidden md:flex items-center space-x-3">
+        <div className="hidden lg:flex items-center space-x-2 xl:space-x-3">
           <Button 
             variant="ghost" 
             size="sm" 

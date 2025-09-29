@@ -76,7 +76,7 @@ const NewsletterConfirmationModal = ({
 
   return (
     <Dialog open={isOpen} onOpenChange={onClose}>
-      <DialogContent className="sm:max-w-md">
+      <DialogContent className="w-[95vw] max-w-md mx-4 sm:mx-0">
         <DialogHeader>
           <DialogTitle className="flex items-center gap-2">
             <Mail className="w-5 h-5 text-primary" />
@@ -84,7 +84,7 @@ const NewsletterConfirmationModal = ({
           </DialogTitle>
         </DialogHeader>
         
-        <div className="space-y-6">
+        <div className="space-y-4 md:space-y-6">
           {/* Email Section */}
           <div className="space-y-3">
             <Label className="text-sm font-medium">Email Address</Label>
@@ -162,18 +162,18 @@ const NewsletterConfirmationModal = ({
           </div>
 
           {/* Action Buttons */}
-          <div className="flex gap-3 pt-4">
+          <div className="flex flex-col sm:flex-row gap-2 sm:gap-3 pt-4">
             <Button 
               variant="outline" 
               onClick={onClose}
-              className="flex-1"
+              className="flex-1 min-h-[44px]"
             >
               Cancel
             </Button>
             <Button 
               onClick={handleConfirm}
               disabled={!email || !!emailError}
-              className="flex-1"
+              className="flex-1 min-h-[44px]"
             >
               Confirm Subscription
             </Button>
