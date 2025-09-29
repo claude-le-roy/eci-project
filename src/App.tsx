@@ -11,6 +11,16 @@ import Programs from "./pages/Programs";
 import Contact from "./pages/Contact";
 import Donate from "./pages/Donate";
 import Dashboard from "./pages/Dashboard";
+import DashboardAnalytics from "./pages/DashboardAnalytics";
+import DashboardPrograms from "./pages/DashboardPrograms";
+import DashboardUsers from "./pages/DashboardUsers";
+import DashboardEvents from "./pages/DashboardEvents";
+import DashboardReports from "./pages/DashboardReports";
+import DashboardGrowth from "./pages/DashboardGrowth";
+import DashboardLocations from "./pages/DashboardLocations";
+import DashboardMessages from "./pages/DashboardMessages";
+import DashboardSettings from "./pages/DashboardSettings";
+import DashboardProfile from "./pages/DashboardProfile";
 import SignUp from "./pages/SignUp";
 import SignIn from "./pages/SignIn";
 import VerifyOTP from "./pages/VerifyOTP";
@@ -35,6 +45,16 @@ const App = () => (
           <Route path="/contact" element={<Contact />} />
           <Route path="/donate" element={<Donate />} />
           <Route path="/dashboard" element={<Dashboard />} />
+          <Route path="/dashboard/analytics" element={<DashboardAnalytics />} />
+          <Route path="/dashboard/programs" element={<DashboardPrograms />} />
+          <Route path="/dashboard/users" element={<DashboardUsers />} />
+          <Route path="/dashboard/events" element={<DashboardEvents />} />
+          <Route path="/dashboard/reports" element={<DashboardReports />} />
+          <Route path="/dashboard/growth" element={<DashboardGrowth />} />
+          <Route path="/dashboard/locations" element={<DashboardLocations />} />
+          <Route path="/dashboard/messages" element={<DashboardMessages />} />
+          <Route path="/dashboard/settings" element={<DashboardSettings />} />
+          <Route path="/dashboard/profile" element={<DashboardProfile />} />
           <Route path="/auth/sign-up" element={<SignUp />} />
           <Route path="/auth/sign-in" element={<SignIn />} />
           <Route path="/auth/verify-otp" element={<VerifyOTP />} />
