@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Dialog, DialogContent, DialogHeader, DialogTitle } from "@/components/ui/dialog";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -26,6 +26,15 @@ const NewsletterConfirmationModal = ({
   const [email, setEmail] = useState(initialEmail);
   const [emailError, setEmailError] = useState("");
   const [isEditing, setIsEditing] = useState(false);
+
+  // Sync email state with prop when modal opens
+  useEffect(() => {
+    if (isOpen) {
+      setEmail(initialEmail);
+      setEmailError("");
+      setIsEditing(false);
+    }
+  }, [isOpen, initialEmail]);
 
   const validateEmail = (email: string) => {
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
