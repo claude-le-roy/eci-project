@@ -19,6 +19,7 @@ export type Database = {
           city_of_residence: string | null
           country_of_birth: string | null
           created_at: string
+          date_of_birth: string | null
           first_name: string
           id: string
           last_name: string
@@ -32,6 +33,7 @@ export type Database = {
           city_of_residence?: string | null
           country_of_birth?: string | null
           created_at?: string
+          date_of_birth?: string | null
           first_name: string
           id?: string
           last_name: string
@@ -45,6 +47,7 @@ export type Database = {
           city_of_residence?: string | null
           country_of_birth?: string | null
           created_at?: string
+          date_of_birth?: string | null
           first_name?: string
           id?: string
           last_name?: string

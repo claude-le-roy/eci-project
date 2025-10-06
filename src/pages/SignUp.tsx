@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import { useForm } from "react-hook-form";
+import { useForm, Controller } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
 import { Button } from "@/components/ui/button";
@@ -9,6 +9,7 @@ import { Label } from "@/components/ui/label";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
+import { DatePicker } from "@/components/ui/date-picker";
 import { useToast } from "@/hooks/use-toast";
 import { supabase } from "@/integrations/supabase/client";
 import { Eye, EyeOff, UserPlus } from "lucide-react";
@@ -28,6 +29,12 @@ const signUpSchema = z.object({
     .max(20, "Username must be no more than 20 characters")
     .regex(/^[a-zA-Z0-9]+$/, "Username can only contain letters and numbers"),
   phoneNumber: z.string().min(1, "Phone number is required"),
+  dateOfBirth: z.date({
+    required_error: "Date of birth is required",
+  }).refine((date) => {
+    const age = new Date().getFullYear() - date.getFullYear();
+    return age >= 13 && age <= 100;
+  }, "You must be between 13 and 100 years old"),
   countryOfBirth: z.string().min(1, "Country of birth is required"),
   cityOfResidence: z.string().min(1, "City of residence is required"),
   userType: z.enum(["volunteer", "student"], {
@@ -49,6 +56,7 @@ const SignUp = () => {
     formState: { errors },
     setValue,
     watch,
+    control,
   } = useForm<SignUpFormData>({
     resolver: zodResolver(signUpSchema),
   });
@@ -68,6 +76,7 @@ const SignUp = () => {
             last_name: data.lastName,
             username: data.username,
             phone_number: data.phoneNumber,
+            date_of_birth: data.dateOfBirth.toISOString().split('T')[0],
             country_of_birth: data.countryOfBirth,
             city_of_residence: data.cityOfResidence,
             user_type: data.userType,
@@ -215,6 +224,25 @@ const SignUp = () => {
                   />
                   {errors.phoneNumber && (
                     <p className="text-sm text-destructive">{errors.phoneNumber.message}</p>
+                  )}
+                </div>
+
+                <div className="space-y-2">
+                  <Label htmlFor="dateOfBirth">Date of Birth</Label>
+                  <Controller
+                    name="dateOfBirth"
+                    control={control}
+                    render={({ field }) => (
+                      <DatePicker
+                        selected={field.value}
+                        onSelect={field.onChange}
+                        placeholderText="Select your date of birth"
+                        className={errors.dateOfBirth ? "border-destructive" : ""}
+                      />
+                    )}
+                  />
+                  {errors.dateOfBirth && (
+                    <p className="text-sm text-destructive">{errors.dateOfBirth.message}</p>
                   )}
                 </div>
 

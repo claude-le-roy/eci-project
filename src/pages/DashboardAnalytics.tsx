@@ -25,6 +25,15 @@ const engagementData = [
   { name: "Low", value: 20, color: "hsl(var(--muted))" },
 ];
 
+const ageDemographicsData = [
+  { ageRange: "13-17", count: 45, percentage: 12.9 },
+  { ageRange: "18-24", count: 120, percentage: 34.3 },
+  { ageRange: "25-34", count: 95, percentage: 27.1 },
+  { ageRange: "35-44", count: 58, percentage: 16.6 },
+  { ageRange: "45-54", count: 22, percentage: 6.3 },
+  { ageRange: "55+", count: 10, percentage: 2.8 },
+];
+
 const kpiData = [
   { title: "User Engagement Rate", value: "78.5%", change: "+5.2%", icon: Users },
   { title: "Program Completion", value: "82.3%", change: "+3.1%", icon: TrendingUp },
@@ -211,6 +220,85 @@ const DashboardAnalytics = () => {
                     </BarChart>
                   </ResponsiveContainer>
                 </ChartContainer>
+              </CardContent>
+            </Card>
+
+            {/* Age Demographics Section */}
+            <Card className="bg-card/50 backdrop-blur-sm border-border/50">
+              <CardHeader>
+                <CardTitle className="text-foreground">Age Demographics</CardTitle>
+                <p className="text-sm text-muted-foreground">Distribution of users by age range - insights on target demographic</p>
+              </CardHeader>
+              <CardContent className="space-y-6">
+                <ChartContainer
+                  config={{
+                    count: { label: "User Count", color: "hsl(var(--primary))" },
+                  }}
+                  className="h-[300px]"
+                >
+                  <ResponsiveContainer width="100%" height="100%">
+                    <BarChart data={ageDemographicsData}>
+                      <CartesianGrid strokeDasharray="3 3" className="stroke-muted/20" />
+                      <XAxis dataKey="ageRange" className="text-muted-foreground" />
+                      <YAxis className="text-muted-foreground" />
+                      <ChartTooltip 
+                        content={({ active, payload }) => {
+                          if (active && payload && payload.length) {
+                            return (
+                              <div className="bg-background border border-border p-3 rounded-lg shadow-elegant">
+                                <p className="font-semibold text-foreground">{payload[0].payload.ageRange} years</p>
+                                <p className="text-sm text-muted-foreground">
+                                  Count: {payload[0].payload.count} users
+                                </p>
+                                <p className="text-sm text-muted-foreground">
+                                  Percentage: {payload[0].payload.percentage}%
+                                </p>
+                              </div>
+                            );
+                          }
+                          return null;
+                        }}
+                      />
+                      <Legend />
+                      <Bar dataKey="count" fill="hsl(var(--primary))" radius={[4, 4, 0, 0]} name="User Count" />
+                    </BarChart>
+                  </ResponsiveContainer>
+                </ChartContainer>
+                
+                <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-4">
+                  {ageDemographicsData.map((range, index) => (
+                    <div key={index} className="p-4 border border-border/50 rounded-lg bg-card/30 hover:shadow-lg transition-all">
+                      <p className="text-sm font-medium text-muted-foreground">{range.ageRange} yrs</p>
+                      <p className="text-2xl font-bold text-foreground">{range.count}</p>
+                      <p className="text-xs text-muted-foreground">{range.percentage}%</p>
+                    </div>
+                  ))}
+                </div>
+
+                <div className="p-4 bg-primary/5 rounded-lg border border-primary/20">
+                  <h4 className="font-semibold text-foreground mb-3 flex items-center gap-2">
+                    <TrendingUp className="h-5 w-5 text-primary" />
+                    Key Demographic Insights
+                  </h4>
+                  <ul className="space-y-2 text-sm text-muted-foreground">
+                    <li className="flex items-start gap-2">
+                      <span className="text-primary mt-0.5">•</span>
+                      <span><strong>Primary Target (18-34):</strong> 61.4% of users fall in this range, indicating strong engagement from young adults and early career professionals</span>
+                    </li>
+                    <li className="flex items-start gap-2">
+                      <span className="text-primary mt-0.5">•</span>
+                      <span><strong>Emerging Demographic (13-17):</strong> 12.9% are teenagers, showing growing interest in early career development and mentorship</span>
+                    </li>
+                    <li className="flex items-start gap-2">
+                      <span className="text-primary mt-0.5">•</span>
+                      <span><strong>Growth Opportunity (45+):</strong> Only 9.1% of users are 45+, presenting an opportunity to expand programs targeting experienced professionals as mentors</span>
+                    </li>
+                    <li className="flex items-start gap-2">
+                      <span className="text-primary mt-0.5">•</span>
+                      <span><strong>Program Alignment:</strong> Current age distribution aligns well with ECI's mission to train and empower young professionals entering the workforce</span>
+                    </li>
+                  </ul>
+                </div>
               </CardContent>
             </Card>
           </div>
