@@ -4,7 +4,11 @@ import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Progress } from "@/components/ui/progress";
-import { Heart, Users, Award, Shield, CheckCircle, Building, Handshake, Star } from "lucide-react";
+import { Heart, Users, Award, Shield, CheckCircle, Building, Handshake, Star, CreditCard, Smartphone } from "lucide-react";
+import { Input } from "@/components/ui/input";
+import { Label } from "@/components/ui/label";
+import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import { useToast } from "@/hooks/use-toast";
@@ -12,16 +16,45 @@ import { useToast } from "@/hooks/use-toast";
 const Donate = () => {
   const { toast } = useToast();
   const [selectedAmount, setSelectedAmount] = useState(0);
+  const [customAmount, setCustomAmount] = useState("");
+  const [paymentMethod, setPaymentMethod] = useState<"mobile_money" | "card">("mobile_money");
+  const [mobileNetwork, setMobileNetwork] = useState("");
+  const [phoneNumber, setPhoneNumber] = useState("");
+  const [cardNumber, setCardNumber] = useState("");
+  const [cardExpiry, setCardExpiry] = useState("");
+  const [cardCvv, setCardCvv] = useState("");
   const [lastSubmission, setLastSubmission] = useState<number | null>(null);
 
   const donationAmounts = [25, 50, 100, 250, 500, 1000];
   
-  const handleDonation = (amount: number) => {
+  const handleDonation = () => {
+    const amount = customAmount ? parseFloat(customAmount) : selectedAmount;
+    
+    if (amount <= 0) {
+      toast({
+        title: "Invalid Amount",
+        description: "Please enter a valid donation amount.",
+        variant: "destructive",
+      });
+      return;
+    }
+
+    // Rate limiting check
+    const now = Date.now();
+    if (lastSubmission && now - lastSubmission < 30000) {
+      toast({
+        title: "Please Wait",
+        description: "Please wait before making another donation attempt.",
+        variant: "destructive",
+      });
+      return;
+    }
+
     toast({
-      title: "Thank You!",
-      description: `Redirecting to secure payment for GH₵${amount}...`,
+      title: "Payment Form Ready",
+      description: `Payment form prepared for GH₵${amount}. (Flutterwave integration pending)`,
     });
-    // Here would integrate with actual payment gateway
+    setLastSubmission(now);
   };
 
   const sponsorshipTiers = [
@@ -153,8 +186,11 @@ const Donate = () => {
                       {donationAmounts.map((amount) => (
                         <Button
                           key={amount}
-                          variant={selectedAmount === amount ? "default" : "outline"}
-                          onClick={() => setSelectedAmount(amount)}
+                          variant={selectedAmount === amount && !customAmount ? "default" : "outline"}
+                          onClick={() => {
+                            setSelectedAmount(amount);
+                            setCustomAmount("");
+                          }}
                           className="h-12"
                         >
                           GH₵{amount}
@@ -163,51 +199,142 @@ const Donate = () => {
                     </div>
                   </div>
 
+                  <div className="space-y-2">
+                    <Label htmlFor="customAmount">Or Enter Custom Amount</Label>
+                    <Input
+                      id="customAmount"
+                      type="number"
+                      placeholder="Enter amount"
+                      value={customAmount}
+                      onChange={(e) => {
+                        setCustomAmount(e.target.value);
+                        setSelectedAmount(0);
+                      }}
+                      min="1"
+                    />
+                  </div>
+
                   <div className="border-t pt-6">
                     <h4 className="font-semibold mb-3">Your Impact:</h4>
-                    {selectedAmount > 0 && (
+                    {(selectedAmount > 0 || parseFloat(customAmount) > 0) && (
                       <div className="bg-muted p-4 rounded-lg">
-                        {selectedAmount >= 25 && selectedAmount < 100 && (
+                        {((customAmount ? parseFloat(customAmount) : selectedAmount) >= 25 && (customAmount ? parseFloat(customAmount) : selectedAmount) < 100) && (
                           <p className="text-sm">Provides career coaching for 1 student for a month</p>
                         )}
-                        {selectedAmount >= 100 && selectedAmount < 250 && (
+                        {((customAmount ? parseFloat(customAmount) : selectedAmount) >= 100 && (customAmount ? parseFloat(customAmount) : selectedAmount) < 250) && (
                           <p className="text-sm">Sponsors a CV workshop for 10 students</p>
                         )}
-                        {selectedAmount >= 250 && selectedAmount < 500 && (
+                        {((customAmount ? parseFloat(customAmount) : selectedAmount) >= 250 && (customAmount ? parseFloat(customAmount) : selectedAmount) < 500) && (
                           <p className="text-sm">Funds mentorship matching for 5 students</p>
                         )}
-                        {selectedAmount >= 500 && (
+                        {(customAmount ? parseFloat(customAmount) : selectedAmount) >= 500 && (
                           <p className="text-sm">Supports comprehensive career program for 20 students</p>
                         )}
                       </div>
                     )}
                   </div>
 
-                      <Button 
-                        className="w-full" 
-                        size="lg"
-                        onClick={() => {
-                          // Rate limiting check
-                          const now = Date.now();
-                          if (lastSubmission && now - lastSubmission < 30000) {
-                            toast({
-                              title: "Please Wait",
-                              description: "Please wait before making another donation attempt.",
-                              variant: "destructive",
-                            });
-                            return;
-                          }
-                          handleDonation(selectedAmount);
-                        }}
-                        disabled={selectedAmount === 0}
-                      >
-                    Donate GH₵{selectedAmount}
+                  <div className="border-t pt-6 space-y-4">
+                    <h4 className="font-semibold">Payment Method</h4>
+                    <RadioGroup value={paymentMethod} onValueChange={(value: any) => setPaymentMethod(value)}>
+                      <div className="flex items-center space-x-2 border rounded-lg p-4 cursor-pointer hover:bg-accent" onClick={() => setPaymentMethod("mobile_money")}>
+                        <RadioGroupItem value="mobile_money" id="mobile_money" />
+                        <Label htmlFor="mobile_money" className="flex items-center gap-2 cursor-pointer flex-1">
+                          <Smartphone className="w-5 h-5 text-primary" />
+                          Mobile Money
+                        </Label>
+                      </div>
+                      <div className="flex items-center space-x-2 border rounded-lg p-4 cursor-pointer hover:bg-accent" onClick={() => setPaymentMethod("card")}>
+                        <RadioGroupItem value="card" id="card" />
+                        <Label htmlFor="card" className="flex items-center gap-2 cursor-pointer flex-1">
+                          <CreditCard className="w-5 h-5 text-primary" />
+                          Visa / Mastercard
+                        </Label>
+                      </div>
+                    </RadioGroup>
+
+                    {paymentMethod === "mobile_money" && (
+                      <div className="space-y-4 animate-in fade-in-50">
+                        <div className="space-y-2">
+                          <Label htmlFor="network">Select Network</Label>
+                          <Select value={mobileNetwork} onValueChange={setMobileNetwork}>
+                            <SelectTrigger id="network">
+                              <SelectValue placeholder="Choose your network" />
+                            </SelectTrigger>
+                            <SelectContent>
+                              <SelectItem value="mtn">MTN Mobile Money</SelectItem>
+                              <SelectItem value="vodafone">Vodafone Cash</SelectItem>
+                              <SelectItem value="airteltigo">AirtelTigo Money</SelectItem>
+                            </SelectContent>
+                          </Select>
+                        </div>
+                        <div className="space-y-2">
+                          <Label htmlFor="phone">Phone Number</Label>
+                          <Input
+                            id="phone"
+                            type="tel"
+                            placeholder="024XXXXXXX"
+                            value={phoneNumber}
+                            onChange={(e) => setPhoneNumber(e.target.value)}
+                          />
+                        </div>
+                      </div>
+                    )}
+
+                    {paymentMethod === "card" && (
+                      <div className="space-y-4 animate-in fade-in-50">
+                        <div className="space-y-2">
+                          <Label htmlFor="cardNumber">Card Number</Label>
+                          <Input
+                            id="cardNumber"
+                            type="text"
+                            placeholder="1234 5678 9012 3456"
+                            value={cardNumber}
+                            onChange={(e) => setCardNumber(e.target.value)}
+                            maxLength={19}
+                          />
+                        </div>
+                        <div className="grid grid-cols-2 gap-4">
+                          <div className="space-y-2">
+                            <Label htmlFor="expiry">Expiry Date</Label>
+                            <Input
+                              id="expiry"
+                              type="text"
+                              placeholder="MM/YY"
+                              value={cardExpiry}
+                              onChange={(e) => setCardExpiry(e.target.value)}
+                              maxLength={5}
+                            />
+                          </div>
+                          <div className="space-y-2">
+                            <Label htmlFor="cvv">CVV</Label>
+                            <Input
+                              id="cvv"
+                              type="text"
+                              placeholder="123"
+                              value={cardCvv}
+                              onChange={(e) => setCardCvv(e.target.value)}
+                              maxLength={3}
+                            />
+                          </div>
+                        </div>
+                      </div>
+                    )}
+                  </div>
+
+                  <Button 
+                    className="w-full" 
+                    size="lg"
+                    onClick={handleDonation}
+                    disabled={!selectedAmount && !customAmount}
+                  >
+                    Donate GH₵{customAmount || selectedAmount}
                   </Button>
 
                   <div className="text-center">
                     <div className="flex items-center justify-center gap-2 text-sm text-muted-foreground">
                       <Shield className="w-4 h-4" />
-                      Secure payment powered by Stripe
+                      Secure payment powered by Flutterwave
                     </div>
                   </div>
                 </CardContent>
